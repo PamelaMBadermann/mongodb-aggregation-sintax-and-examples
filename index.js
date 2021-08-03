@@ -280,8 +280,53 @@
 //                  { $project: { name: 1, gender: 1, tags: 1} }
 //            ]);
 //
+// * 15.3     db.persons.aggregate([
+//              // STAGE ONE
+//                  { $unwind: "$tags" }
+//              // STAGE TWO
+//                  { $project: { name: 1, index: 1, tags: 1} }
+//            ]);
+//
+// * 16.1     db.persons.aggregate([
+//              // STAGE ONE
+//                  { $unwind: "$tags" }
+//              // STAGE TWO
+//                  { $groups: { _id: "$tags"} }
+//            ]);
+//
 // ------ $skip: *** SKIP CERTAIN AMOUNT OF DOCUMENTS -------------------------
 //          - SINTAX:
-//              { $skip : <number>
+//              { $skip : <number> }
 //
+
+
+
+// *** MONGODB AGGREGATE: ACCUMULATORS ----------------------------------------
+//          - LOGIC:
+//              - $sum: example in documents group by age with sum accumulator.
+//                      before output, we go to each of those documents, and 
+//                      count total quantity. the result, is only one document
+//                      per with new field called TOTAL.
+//
+//          - SINTAX:
+//              { $<accumulatorOperator>: <expression> }
+//
+// ------ $sum Accumulator: ---------------------------------------------------
+//                       *** SUMS NUMERIC VALUES FOR THE DOCUMENT IN EACH GROUP
+//
+//          - EXAMPLES:
+// * 17.1     { $sum: <expression | number> }
+//
+// * 17.2     db.persons.aggregate([
+//                  { total: { $sum: "$quantity" } }
+//            ]);
+//
+// * 17.3     db.persons.aggregate([                         * $sum and $group:
+//                  {
+//                      $group: {
+//                          _id: "$age",
+//                          count: { $sum: 1 }
+//                      }
+//                  }
+//            ]);
 //
