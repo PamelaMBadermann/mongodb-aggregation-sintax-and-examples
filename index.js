@@ -471,7 +471,33 @@
 // ------ $out Stage: ---------------------------------------------------------
 //                     *** WRITES RESULTING DOCUMENTS TO THE MONGODB COLLECTION
 //
+//          - NOTICE: $out MUST be last stage in the pipeline. If output
+//                    collection doesn't existt exist, it will be created
+//                    automatically
+//
 //          - SINTAX:
 //              { $out: "<outputCollectionName>" }
 //
 //          - EXAMPLES:
+// * 21.1     db.persons.aggregate([
+//                  { $out: "newCollection" }
+//            ]);
+//
+// * 21.2     db.persons.aggregate([
+//                  { $group: { _id: { age: "$age", eyeColor: "$eyeColor"}}},
+//                  { $out: "aggregrationResults" }
+//            ]);             * documents from the $group stage will be
+//                              written to the collection "aggregrationResults"
+//                          
+// * 21.3     db.persons.aggregate([
+//                  {
+//                      $project: {
+//                          name: 1,
+//                          nameType: { $type: "$name" },
+//                          ageType: { $type: "$age" },
+//                          tagsType: { $type: "$tags" },
+//                          companyType: { $type: "$company" }
+//                      }
+//                  },
+//                  { $out: "outCollection" }
+//            ]);
