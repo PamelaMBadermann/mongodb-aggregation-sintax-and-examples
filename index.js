@@ -17,7 +17,7 @@
 //
 //
 // 		- STAGE 1:
-//      - $match: *** FILTER DOCUMENTS BY CERTAIN QUERY -----------------------
+// ------ $match: *** FILTER DOCUMENTS BY CERTAIN QUERY -----------------------
 //          - SINTAX:
 //              { $match : <query> } }
 //
@@ -36,7 +36,7 @@
 //              ]);
 // 
 //
-//      - $group: *** GROUP DOCUMENTS BY CERTAIN EXPRESSIONS ------------------
+// ------ $group: *** GROUP DOCUMENTS BY CERTAIN EXPRESSIONS ------------------
 //          - SINTAX:
 //              { $group: { _id: <expression>, <field1>:
 //                  { <acumulator1> : <expression1> }, ... } }
@@ -85,7 +85,7 @@
 //                  { $match: { "_id.eyeColor": "blue" } }
 //              ]);
 //
-//      - $count: *** COUNT NUMBER OF OBJECTS DOCUMENTS -----------------------
+// ------ $count: *** COUNT NUMBER OF OBJECTS DOCUMENTS -----------------------
 //          - SINTAX:
 //            { $count : "<title>" }
 //
@@ -140,20 +140,49 @@
 //                  { $count: "eyeColorAndAge"}
 //            ]);
 //
-//      - $sort: *** SORT OBJECTS ---------------------------------------------
+// ------ $sort: *** SORT INPUT DOCUMENTS BY CERTAIN FIELD --------------------
 //          - SINTAX:
-//              { $sort : <fields>
+//              { $sort : <field1>: <-1 | 1>, <field2>: <-1 | 1> ... } }
+//                                   where: -1 is descending and 1 is ascending
 //
-//      - $project: *** FILTER FIELDS IN SOME DOCUMENTS -----------------------
+//          - EXAMPLES:
+// * 10.1     db.persons.aggregate([
+//                  { $sort: {score: -1} } 
+//            ]);
+//
+// * 10.2     db.persons.aggregate([
+//                  { $sort: {age: 1, country: 1} } 
+//            ]);
+//
+// * 10.3     db.persons.aggregate([
+//                  { $sort: {age: -1, gender: -1, eyeColor: 1 } } 
+//            ]);
+//
+// * 11.1     db.persons.aggregate([
+//                  { $group: { _id: "$favoriteFruit" } },
+//                  { $sort: { _id: 1 } }
+//            ]);
+//
+// * 11.2     db.persons.aggregate([
+//                  { $group: { _id: "$age"}},
+//                  { $sort: { _id: 1 } }
+//            ]);
+//
+// * 11.3     db.persons.aggregate([
+//                  { $group: { _id: { eyeColor: "$eyeColor", favoriteFruit: "$favoriteFruit"}}},
+//                  { $sort: { "_id.eyeColor": 1, "_id.favoriteFruit": -1 } }
+//            ]);
+//
+// ------ $project: *** FILTER FIELDS IN SOME DOCUMENTS -----------------------
 //          - SINTAX:
 //              { $project : <fields>
 //
-
-//      - $limit: *** LIMIT NUMBER OF DOCUMENTS
+//
+// ------ $limit: *** LIMIT NUMBER OF DOCUMENTS -------------------------------
 //          - SINTAX:
 //              { $limit : <number>
 //
-//      - $skip: *** SKIP CERTAIN AMOUNT OF DOCUMENTS
+// ------ $skip: *** SKIP CERTAIN AMOUNT OF DOCUMENTS -------------------------
 //          - SINTAX:
 //              { $skip : <number>
 //
