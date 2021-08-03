@@ -175,8 +175,67 @@
 //
 // ------ $project: *** FILTER FIELDS IN SOME DOCUMENTS -----------------------
 //          - SINTAX:
-//              { $project : <fields>
+//              { $project: { <field1>: <1>, <field2>: <0>, <newField1>: <expression> ... } }
 //
+//          - EXAMPLES:
+// * 12.1     db.persons.aggregate([
+//                  { $project: {name: 1, "company.title": 1} } 
+//            ]);
+//
+// * 12.2     db.persons.aggregate([
+//                  { $project: { _id: 0, name: 1, age: 1} } 
+//            ]);
+//
+// * 12.3     db.persons.aggregate([
+//                  { $project: { eyeColor: 0, age: 0 } }
+//            ]);
+//
+// * 12.4     db.persons.aggregate([
+//                  { $project: { name: 1, newAge: "$age" } }
+//            ]);
+//
+// * 12.5     db.persons.aggregate([
+//                  { $project: { name: 1, "company.location.country": 1 } }
+//            ]);
+//
+// * 12.6     db.persons.aggregate([
+//                  { $project: { isActive: 1, name: 1, gender: 1 } }
+//            ]);
+//
+// * 12.7     db.persons.aggregate([
+//                  { $project: { isActive: 1, name: 1, gender: 1 } }
+//            ]);
+//
+// * 12.8     db.persons.aggregate([
+//                  { $project: { isActive: 0, name: 0, gender: 0 } }
+//            ]);                          *get all fields, except those above.
+//
+//                                  
+// * 13.1     db.persons.aggregate([                  *project with new fields:
+//                  { $project: { 
+//                      _id: 0,
+//                      name: 1,
+//                      info: {
+//                          eyes: "$eyeColor",
+//                          fruit: "$favoriteFruit",
+//                          country: 
+//                          "$company.location.country"
+//                      }
+//                  } } 
+//            ]);
+//
+// * 13.2     db.persons.aggregate([
+//                  { $project: { 
+//                      _id: 0,
+//                      index: 1,
+//                      name: 1,
+//                      info: {
+//                          eyes: "$eyeColor",
+//                          company: "$company.title",
+//                          country: "$company.location.country"
+//                      }
+//                  } }
+//            ]);                  
 //
 // ------ $limit: *** LIMIT NUMBER OF DOCUMENTS -------------------------------
 //          - SINTAX:
