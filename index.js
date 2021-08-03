@@ -22,12 +22,15 @@
 //              { $match : <query> } }
 //
 //          - EXAMPLES:
-//              { $match : { "name" : "John", "age" : 25 }
-//              db.persons.aggregate([
+// * 1           db.persons.aggregate([
+//                   { $match : { "name" : "John", "age" : 25 }              
+//              ]);
+//              
+// * 2           db.persons.aggregate([
 //                   { $match: {age: {$gt: 25} } }              
 //              ]);
 //
-//              db.persons.aggregate([
+// * 3           db.persons.aggregate([
 //                   { $match: {$and: [ {gender: "female"} ,
 //                          {age: {$gt: 25}} ] } }
 //              ]);
@@ -39,16 +42,39 @@
 //                  { <acumulator1> : <expression1> }, ... } }
 //
 //          - EXAMPLES:
-//              db.persons.aggregate([         * notice: _id is Mandatory field
+// * 1          db.persons.aggregate([         * notice: _id is Mandatory field
 //                  { $group: { _id: "$age"} }   
 //              ]);
 //
-//              db.persons.aggregate([
+// * 2          db.persons.aggregate([
 //                  { $group: { _id: "$gender"} }
 //              ]);
 //
-//              db.persons.aggregate(       * example of group by nested fields
+// * 3          db.persons.aggregate(       * example of group by nested fields
 //                  { $group: { _id: "$company.location.country"} }
+//              ]);
+//
+// * 4          db.persons.aggregate(     * example of group by multiple fields
+//                  { $group: { _id: {age: "$age", gender: "$gender"} } }
+//              ]);
+//
+// * 5.1        db.persons.aggregate(        * combination of $match and $group
+//                  // STAGE ONE:
+//                  { $match: {favouriteFruit: "banana" } },
+//                  // STAGE TWO:
+//                  { $group: { _id: {age: "$age", eyeColor: "$eyeColor"} } }
+//              ]);
+//
+// * 5.2        db.persons.aggregate(
+//                  { $match: {favouriteFruit: "banana" } },
+//                  { $group: { _id: {age: "$age", age: "$age", gender: "$gender"} } }
+//              ]);
+//
+// * 6        db.persons.aggregate(                  * swap $match and $group
+//                  // STAGE ONE:
+//                  { $match: {gender: "female"} },
+//                  // STAGE TWO:
+//                  { $group: { _id: {age: "$age", age: "$age"} } }
 //              ]);
 //
 //      - $project: *** FILTER FIELDS IN SOME DOCUMENTS -----------------------
