@@ -1,115 +1,115 @@
 // *** MONGODB AGGREGATE: -----------------------------------------------------
-// 		- SINTAX:
-//      db.<colection>.aggregate([
-//          <stage1>,
-//          <stage2>,
-//           ...
-//          <stageN>
-// ])
+// 		    - SINTAX:
+//            db.<colection>.aggregate([
+//                  <stage1>,
+//                  <stage2>,
+//                  ...
+//                  <stageN>
+//            ]);
 
 // *** EXPRESSION: ------------------------------------------------------------
-// 		- EXPRESSION REFERS TO THE NAME OF THE FIELD IN INPUT DOCUMENTS
-//          "$<fieldName>""
+// 		    - EXPRESSION REFERS TO THE NAME OF THE FIELD IN INPUT DOCUMENTS
+//                  "$<fieldName>""
 
 // *** AGGREGATE STAGES: ------------------------------------------------------
-// 		- SINTAX:
-//      { $<stageOperator> : {} }
+// 		    - SINTAX:
+//                  { $<stageOperator> : {} }
 //
-//
-// 		- STAGE 1:
 // ------ $match: *** FILTER DOCUMENTS BY CERTAIN QUERY -----------------------
 //          - SINTAX:
 //              { $match : <query> } }
 //
 //          - EXAMPLES:
-// * 1           db.persons.aggregate([
-//                   { $match : { "name" : "John", "age" : 25 }              
-//              ]);
+// * 1        db.persons.aggregate([
+//                  { $match : { "name" : "John", "age" : 25 }              
+//            ]);
 //              
-// * 2           db.persons.aggregate([
-//                   { $match: {age: {$gt: 25} } }              
-//              ]);
+// * 2        db.persons.aggregate([
+//                  { $match: {age: {$gt: 25} } }              
+//            ]);
 //
-// * 3           db.persons.aggregate([
-//                   { $match: {$and: [ {gender: "female"} ,
+// * 3        db.persons.aggregate([
+//                  { $match: {$and: [ {gender: "female"} ,
 //                          {age: {$gt: 25}} ] } }
-//              ]);
+//            ]);
 // 
 //
 // ------ $group: *** GROUP DOCUMENTS BY CERTAIN EXPRESSIONS ------------------
 //          - SINTAX:
 //              { $group: { _id: <expression>, <field1>:
-//                  { <acumulator1> : <expression1> }, ... } }
+//              { <acumulator1> : <expression1> }, ... } }
+//
+//          - NOTICE: _id is Mandatory field
 //
 //          - EXAMPLES:
-// * 1          db.persons.aggregate([         * notice: _id is Mandatory field
+// * 1        db.persons.aggregate([
 //                  { $group: { _id: "$age"} }   
-//              ]);
+//            ]);
 //
-// * 2          db.persons.aggregate([
+// * 2        db.persons.aggregate([
 //                  { $group: { _id: "$gender"} }
-//              ]);
+//            ]);
 //
-// * 3          db.persons.aggregate(       * example of group by nested fields
+// * 3        db.persons.aggregate(       * example of group by nested fields
 //                  { $group: { _id: "$company.location.country"} }
-//              ]);
+//            ]);
 //
-// * 4          db.persons.aggregate(     * example of group by multiple fields
+// * 4        db.persons.aggregate(     * example of group by multiple fields
 //                  { $group: { _id: {age: "$age", gender: "$gender"} } }
-//              ]);
+//            ]);
 //
-// * 5.1        db.persons.aggregate(        * combination of $match and $group
-//                  // STAGE ONE:
+// * 5.1      db.persons.aggregate(        * combination of $match and $group
+//              // STAGE ONE:
 //                  { $match: {favouriteFruit: "banana" } },
-//                  // STAGE TWO:
+//              // STAGE TWO:
 //                  { $group: { _id: {age: "$age", eyeColor: "$eyeColor"} } }
-//              ]);
+//            ]);
 //
-// * 5.2        db.persons.aggregate(
+// * 5.2      db.persons.aggregate(
 //                  { $match: {favouriteFruit: "banana" } },
 //                  { $group: { _id: {age: "$age", age: "$age", gender: "$gender"} } }
-//              ]);
+//            ]);
 //
 // * 6        db.persons.aggregate(                  * swap $match and $group
 //                  { $match: {gender: "female"} },
 //                  { $group: { _id: {age: "$age", age: "$age"} } }
-//              ]);
+//            ]);
 //
 // * 7.1      db.persons.aggregate(                 * example $group and $match
 //                  { $group: { _id: {age: "$age", eyeColor: "$eyeColor"} } }
 //                  { $match: { "_id.age": {$gt: 30} } }
-//              ]);
+//            ]);
 //
 // * 7.2      db.persons.aggregate(                 
 //                  { $group: { _id: {eyeColor: "$eyeColor", age: "$age"} } }
 //                  { $match: { "_id.eyeColor": "blue" } }
-//              ]);
+//            ]);
 //
 // ------ $count: *** COUNT NUMBER OF OBJECTS DOCUMENTS -----------------------
 //          - SINTAX:
 //            { $count : "<title>" }
 //
 //          - EXAMPLES:
-// * 8.1       db.persons.aggregate([
+// * 8.1      db.persons.aggregate([
 //                  { $count: "allDocumentsCount" }
-//             ]);
+//            ]);
 //
 // * 8.2      db.persons.aggregate([
 //                  { $count: "allDocumentsCount" }
-//             ]);
+//            ]);
 //
-//          - different count methods:
+//                                             * different count methods below:
 //
 // * 8.3      db.persons.aggregate([]).toArray().length   
-//                                       (is the same as 9.2) client-side count
+//                                     * (is the same as 9.2) client-side count
 //
 // * 8.4      db.persons.aggregate([]).itCount()         
-//                                      (is fastier than 9.1) client-side count
+//                                    * (is fastier than 9.1) client-side count
 //
 // * 5.5      db.persons.aggregate([{$count: "total"}])  
-//                                      (is fastier than 9.2) server-side count
+//                                    * (is fastier than 9.2) server-side count
 //
-//                    * notice: Find count() is wrapper of the Aggregate $count
+//          - NOTICE: Find count() is wrapper of the Aggregate $count
 //                                              
 // * 9.1      db.persons.aggregate([                *example of group and count
 //                  { $group: { _id: "$company.location.country"}},
@@ -132,11 +132,11 @@
 //            ]);
 //
 // * 9.5      db.persons.aggregate([
-//                  // STAGE ONE
+//              // STAGE ONE
 //                  { $match: {age: {$gte: 25}}},
-//                  // STAGE TWO
+//              // STAGE TWO
 //                  { $group: { _id: {eyeColor: "$eyeColor", age: "$age"}}},
-//                  // STAGE THREE
+//              // STAGE THREE
 //                  { $count: "eyeColorAndAge"}
 //            ]);
 //
@@ -237,9 +237,48 @@
 //                  } }
 //            ]);                  
 //
-// ------ $limit: *** LIMIT NUMBER OF DOCUMENTS -------------------------------
+// ------ $limit: *** OUTPUTS FIRST N DOCUMENTS FROM THE INPUT ----------------
+//          - SINTAX: 
+//              { $limit : <number> }
+//
+//          * NOTICE: $limit is usually used in:
+//                - sampled aggregation requests with $limit as first stage
+//                - after $sort to produce topN results. make smaller documents
+//
+//          - EXAMPLES:
+// * 14.1     db.persons.aggregate([
+//                  { $limit: 100 },
+//                  { $match: { age: { $gt: 27 } } },
+//                  { $group: { _id: "$company.location.country" } }
+//            ]);
+//
+// * 14.2     db.persons.aggregate([
+//              // STAGE ZERO
+//                  { $limit : 100 },
+//              // STAGE ONE
+//                  { $match: { eyeColor: {$ne: "blue"}}},
+//              // STAGE TWO
+//                  { $group: { _id: {eyeColor: "$eyeColor",
+//                      favoriteFruit: "$favoriteFruit"}}},
+//              // STAGE THREE
+//                  { $sort: {"_id.eyeColor": 1, "_id.favoriteFruit": -1 } }
+//            ]);
+//
+// ------ $unwind: *** SPLITS EACH DOCUMENT WITH SPECIFIED ARRAY---------------
+//                              TO SEVERAL DOCUMENTS: ONE DOC PER ARRAY ELEMENT
 //          - SINTAX:
-//              { $limit : <number>
+//              { $unwind : <arrayReferencedExpression> }
+//
+//          - EXAMPLES:
+// * 15.1     db.persons.aggregate([
+//                  { $unwind: "$tags" }
+//                  { $unwind: "$hobbies" }
+//            ]);
+//
+// * 15.2     db.persons.aggregate([
+//                  { $unwind: "$tags" }
+//                  { $project: { name: 1, gender: 1, tags: 1} }
+//            ]);
 //
 // ------ $skip: *** SKIP CERTAIN AMOUNT OF DOCUMENTS -------------------------
 //          - SINTAX:
