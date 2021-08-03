@@ -501,3 +501,46 @@
 //                  },
 //                  { $out: "outCollection" }
 //            ]);
+
+
+
+
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+
+
+
+// *** MONGODB AGGREGATE: AllowDiskUse: true ----------------------------------
+//
+//            * All aggregation stages can use maximus 100 MB of RAM.
+//
+//            * Server will return error if RAM limit is exceeded.
+//
+//            * Following option will enable MongoDB to write stages data to the temporal files
+//              on the disk.
+//
+//            * This option is useful for aggregation stages that require large amount of RAM.
+//
+//            * MongoDB aggregate allows to use disk for storing temporary data
+//              during the aggregation process.
+//
+//            * If you need to aggregate a large amount of data, you can use
+//              allowDiskUse to use disk for temporary storage.
+//  
+//            * This is useful when you have a very large collection and you
+//              want to avoid running out of memory.
+//
+//            * This option is only available in MongoDB 3.2 or higher.
+//
+//
+//          - SINTAX:
+//              { allowDiskUse: true}
+//
+//          - EXAMPLES:
+//              db.persons.aggregate([], { allowDiskUse: true});
+//
