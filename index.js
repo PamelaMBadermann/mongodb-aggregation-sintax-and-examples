@@ -297,11 +297,21 @@
 // ------ $skip: *** SKIP CERTAIN AMOUNT OF DOCUMENTS -------------------------
 //          - SINTAX:
 //              { $skip : <number> }
-//
+
+
+
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
 
 
 
 // *** MONGODB AGGREGATE: ACCUMULATORS ----------------------------------------
+//                                                       $sum, $avg, $max, $min
 //          - LOGIC:
 //              - $sum: example in documents group by age with sum accumulator.
 //                      before output, we go to each of those documents, and 
@@ -398,3 +408,70 @@
 //                  }
 //            ]);
 //
+
+
+
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+// -⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
+
+
+
+// *** MONGODB AGGREGATE: UNARY OPERATORS -------------------------------------
+//                                        $type, $or, $lt, $gt, $and, $multiply
+//
+//          - LOGIC: query operators provide to locale data within the database
+//                   and projection operators modig=fy how data is presented.
+//
+//          - NOTICE: Unary Operators are usually used in the $project stage.
+//                    In the $group stage Unary Operators can be used only in
+//                    conjuction with Accumulators.
+//
+//          - SINTAX:
+//              { <operator>: <expression> }
+//
+// ------ $type Unary Operator: -----------------------------------------------
+//                                     *** RETURN BSON TYPE OF THE FIELDS VALUE
+//
+//          - SINTAX:
+//              { $type: <expression> }
+//
+//          - EXAMPLES:
+// * 20.1     db.persons.aggregate([
+//                  { $type: "$age" }
+//                  { $type: "$name" }
+//            ]);
+//
+// * 20.2     db.persons.aggregate([
+//                  {
+//                      $project: {
+//                          name: 1,
+//                          eyeColorType: { $type: "$eyeColor" },
+//                          ageType: { $type: "$age" }
+//                      }
+//                  }
+//            ]);
+//
+// * 20.3     db.persons.aggregate([
+//                  {
+//                      $project: {
+//                          name: 1,
+//                          nameType: { $type: "$name" },
+//                          ageType: { $type: "$age" },
+//                          tagsType: { $type: "$tags" },
+//                          companyType: { $type: "$company" }
+//                      }
+//                  }
+//            ]);
+//
+// ------ $out Stage: ---------------------------------------------------------
+//                     *** WRITES RESULTING DOCUMENTS TO THE MONGODB COLLECTION
+//
+//          - SINTAX:
+//              { $out: "<outputCollectionName>" }
+//
+//          - EXAMPLES:
