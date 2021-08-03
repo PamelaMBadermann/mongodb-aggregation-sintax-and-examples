@@ -314,11 +314,20 @@
 // ------ $sum Accumulator: ---------------------------------------------------
 //                       *** SUMS NUMERIC VALUES FOR THE DOCUMENT IN EACH GROUP
 //
-//          - EXAMPLES:
-// * 17.1     { $sum: <expression | number> }
+//          - SINTAX:
+//            { $sum: <expression | number> }
 //
-// * 17.2     db.persons.aggregate([
+// * 17.1     db.persons.aggregate([
 //                  { total: { $sum: "$quantity" } }
+//            ]);
+//
+// * 17.2     db.persons.aggregate([                         * $sum and $group:
+//                  {
+//                      $group: {
+//                          _id: "$age",
+//                          count: { $sum: 1 }
+//                      }
+//                  }
 //            ]);
 //
 // * 17.3     db.persons.aggregate([                         * $sum and $group:
@@ -326,6 +335,65 @@
 //                      $group: {
 //                          _id: "$age",
 //                          count: { $sum: 1 }
+//                      }
+//                  }
+//            ]);
+//
+// * 18.1     db.persons.aggregate([                 * $sum $unwind and $group:
+//                  { $unwind: "$tags" },
+//                  {
+//                      $group: {
+//                          _id: "$tags",
+//                          count: { $sum: 1 }
+//                      }
+//                  }
+//            ]);
+//
+// * 18.2     db.persons.aggregate([                 * $sum $unwind and $group:
+//                  { $unwind: "$tags" },
+//                  {
+//                      $group: {
+//                          _id: "$tags",              * to convert to integer:
+//                          count: {$sum: NumberInt(1)} 
+//                      }
+//                  }
+//            ]);
+//
+// ------ $avg Accumulator: ---------------------------------------------------
+//                          *** CALCULATES AVERAGE VALUE OF THE CERTAIN VALUES
+//                              IN THE DOCUMENTS FOR EACK GROUP
+//
+//          - SINTAX:
+//              { $avg: <expression> }
+//
+//          - EXAMPLES:
+// * 19.1     db.persons.aggregate([
+//                  { avgAge: { $avg: "$age" } }
+//            ]);
+//
+// * 19.2     db.persons.aggregate([                         * $avg and $group:
+//                  {
+//                      $group: {
+//                          _id: "$eyeColor",
+//                          avgAge: { $avg: "$age" }
+//                      }
+//                  }
+//            ]);
+//
+// * 19.3     db.persons.aggregate([                         * $avg and $group:
+//                  {
+//                      $group: {
+//                          _id: "$favoriteFruit",
+//                          avgAge: { $avg: "$age" }
+//                      }
+//                  }
+//            ]);
+//
+// * 19.4     db.persons.aggregate([                         * $avg and $group:
+//                  {
+//                      $group: {
+//                          _id: "$company.location.country",
+//                          avgAge: { $avg: "$age" }
 //                      }
 //                  }
 //            ]);
