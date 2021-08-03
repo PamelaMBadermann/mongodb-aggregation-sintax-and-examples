@@ -71,24 +71,84 @@
 //              ]);
 //
 // * 6        db.persons.aggregate(                  * swap $match and $group
-//                  // STAGE ONE:
 //                  { $match: {gender: "female"} },
-//                  // STAGE TWO:
 //                  { $group: { _id: {age: "$age", age: "$age"} } }
 //              ]);
+//
+// * 7.1      db.persons.aggregate(                 * example $group and $match
+//                  { $group: { _id: {age: "$age", eyeColor: "$eyeColor"} } }
+//                  { $match: { "_id.age": {$gt: 30} } }
+//              ]);
+//
+// * 7.2      db.persons.aggregate(                 
+//                  { $group: { _id: {eyeColor: "$eyeColor", age: "$age"} } }
+//                  { $match: { "_id.eyeColor": "blue" } }
+//              ]);
+//
+//      - $count: *** COUNT NUMBER OF OBJECTS DOCUMENTS -----------------------
+//          - SINTAX:
+//            { $count : "<title>" }
+//
+//          - EXAMPLES:
+// * 8.1       db.persons.aggregate([
+//                  { $count: "allDocumentsCount" }
+//             ]);
+//
+// * 8.2      db.persons.aggregate([
+//                  { $count: "allDocumentsCount" }
+//             ]);
+//
+//          - different count methods:
+//
+// * 8.3      db.persons.aggregate([]).toArray().length   
+//                                       (is the same as 9.2) client-side count
+//
+// * 8.4      db.persons.aggregate([]).itCount()         
+//                                      (is fastier than 9.1) client-side count
+//
+// * 5.5      db.persons.aggregate([{$count: "total"}])  
+//                                      (is fastier than 9.2) server-side count
+//
+//                    * notice: Find count() is wrapper of the Aggregate $count
+//                                              
+// * 9.1      db.persons.aggregate([                *example of group and count
+//                  { $group: { _id: "$company.location.country"}},
+//                  { $count: "contriesCount"}
+//            ]);
+//
+// * 9.2      db.persons.aggregate([
+//                  { $group: { _id: "$age"}},
+//                  { $count: "age"}
+//            ]);
+//
+// * 9.3      db.persons.aggregate([
+//                  { $group: { _id: "$eyeColor"}},
+//                  { $count: "eyeColor"}
+//            ]);
+//
+// * 9.4      db.persons.aggregate([
+//                  { $group: { _id: {eyeColor: "$eyeColor", gender: "$gender"}}},
+//                  { $count: "eyeColorAndGender"}
+//            ]);
+//
+// * 9.5      db.persons.aggregate([
+//                  // STAGE ONE
+//                  { $match: {age: {$gte: 25}}},
+//                  // STAGE TWO
+//                  { $group: { _id: {eyeColor: "$eyeColor", age: "$age"}}},
+//                  // STAGE THREE
+//                  { $count: "eyeColorAndAge"}
+//            ]);
+//
+//      - $sort: *** SORT OBJECTS ---------------------------------------------
+//          - SINTAX:
+//              { $sort : <fields>
 //
 //      - $project: *** FILTER FIELDS IN SOME DOCUMENTS -----------------------
 //          - SINTAX:
 //              { $project : <fields>
 //
-//      - $sort: *** SORT OBJECTS
-//          - SINTAX:
-//              { $sort : <fields>
-//
-//      - $count: *** COUNT NUMBER OF OBJECTS DOCUMENTS
-//          - SINTAX:
-//              { $count : <fields>
-//
+
 //      - $limit: *** LIMIT NUMBER OF DOCUMENTS
 //          - SINTAX:
 //              { $limit : <number>
